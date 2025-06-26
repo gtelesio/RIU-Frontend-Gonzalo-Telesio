@@ -1,0 +1,9 @@
+<app-hero-list
+  [heroes]="(heroes$ | async) ?? []"
+  [loading]="(loading$ | async) ?? false"
+  (add)="onAdd()"
+  (edit)="onEdit($event)"
+  (remove)="onDelete($event)"
+  (filter)="onFilter($event)">
+</app-hero-list>
+<!-- TODO: Add modal or section for hero form --> 

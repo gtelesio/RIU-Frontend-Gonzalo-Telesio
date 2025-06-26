@@ -1,0 +1,23 @@
+<div class="skeleton-container">
+  <div *ngIf="type === 'table'" class="skeleton-table">
+    <div class="skeleton-header">
+      <div class="skeleton-cell"></div>
+      <div class="skeleton-cell"></div>
+      <div class="skeleton-cell"></div>
+      <div class="skeleton-cell"></div>
+    </div>
+    <div *ngFor="let row of [].constructor(rows)" class="skeleton-row">
+      <div class="skeleton-cell"></div>
+      <div class="skeleton-cell"></div>
+      <div class="skeleton-cell"></div>
+      <div class="skeleton-cell"></div>
+    </div>
+  </div>
+  
+  <div *ngIf="type === 'form'" class="skeleton-form">
+    <div *ngFor="let field of [].constructor(3)" class="skeleton-field">
+      <div class="skeleton-label"></div>
+      <div class="skeleton-input"></div>
+    </div>
+  </div>
+</div> 

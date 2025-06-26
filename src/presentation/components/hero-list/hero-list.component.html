@@ -1,0 +1,34 @@
+<div class="hero-list-container">
+  <div class="filter-bar">
+    <input [(ngModel)]="filterValue" (input)="onFilterChange()" placeholder="Filter by name..." />
+    <button (click)="onAdd()">Add</button>
+  </div>
+  
+  <app-loading-skeleton *ngIf="loading" type="table" [rows]="5"></app-loading-skeleton>
+  
+  <table *ngIf="!loading">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Powers</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let hero of heroes">
+        <td>{{ hero.name }}</td>
+        <td>{{ hero.description }}</td>
+        <td>{{ hero.powers.join(', ') }}</td>
+        <td>
+          <button (click)="onEdit(hero)">Edit</button>
+          <button (click)="onRemove(hero)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- Basic pagination -->
+  <div class="pagination">
+    <!-- Pagination logic goes here -->
+  </div>
+</div> 
