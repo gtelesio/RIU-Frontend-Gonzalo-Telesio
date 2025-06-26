@@ -5,10 +5,17 @@
   "compilerOptions": {
     "outDir": "./out-tsc/spec",
     "types": [
-      "jasmine"
-    ]
+      "jasmine",
+      "node"
+    ],
+    "useDefineForClassFields": false,
+    "module": "commonjs"
   },
+  "files": [
+    "src/test-setup.ts"
+  ],
   "include": [
-    "src/**/*.ts"
+    "src/**/*.spec.ts",
+    "src/**/*.d.ts"
   ]
 }

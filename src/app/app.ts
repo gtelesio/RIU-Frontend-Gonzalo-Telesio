@@ -1,17 +1,14 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { CommonModule } from "@angular/common";
+import { Component } from "@angular/core";
+import { RouterOutlet } from "@angular/router";
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterOutlet
-  ],
-  templateUrl: './app.html',
-  styleUrl: './app.scss'
+	selector: "app-root",
+	standalone: true,
+	imports: [CommonModule, RouterOutlet],
+	templateUrl: "./app.html",
+	styleUrl: "./app.scss",
 })
 export class AppComponent {
-  title = 'superheroes-app';
+	title = "superheroes-app";
 }

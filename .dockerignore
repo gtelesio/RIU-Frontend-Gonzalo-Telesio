@@ -5,8 +5,8 @@ dist
 coverage
 .vscode
 .DS_Store
-angular.json
-tsconfig*.json
-yarn.lock
-package-lock.json
+# angular.json
+# tsconfig*.json
+# yarn.lock
+# package-lock.json
 .env 

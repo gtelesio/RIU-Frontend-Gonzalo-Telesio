@@ -1,107 +1,109 @@
-import { TestBed } from '@angular/core/testing';
-import { SuperHeroMockApiService } from '../../../infrastructure/api/super-hero.mock-api';
-import { SuperHero } from '../../../domain/models/super-hero.model';
-import { firstValueFrom } from 'rxjs';
+import { TestBed } from "@angular/core/testing";
+import { firstValueFrom } from "rxjs";
+import type { SuperHero } from "../../../domain/models/super-hero.model";
+import { SuperHeroMockApiService } from "../../../infrastructure/api/super-hero.mock-api";
 
-describe('SuperHeroMockApiService', () => {
-  let service: SuperHeroMockApiService;
+describe("SuperHeroMockApiService", () => {
+	let service: SuperHeroMockApiService;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [SuperHeroMockApiService]
-    });
-    service = TestBed.inject(SuperHeroMockApiService);
-  });
+	beforeEach(() => {
+		TestBed.configureTestingModule({
+			providers: [SuperHeroMockApiService],
+		});
+		service = TestBed.inject(SuperHeroMockApiService);
+	});
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
+	it("should be created", () => {
+		expect(service).toBeTruthy();
+	});
 
-  describe('getAll', () => {
-    it('should return all heroes', async () => {
-      const heroes = await firstValueFrom(service.getAll());
-      
-      expect(heroes.length).toBeGreaterThan(0);
-      expect('id' in heroes[0]).toBe(true);
-      expect('name' in heroes[0]).toBe(true);
-      expect('description' in heroes[0]).toBe(true);
-      expect('powers' in heroes[0]).toBe(true);
-    });
-  });
+	describe("getAll", () => {
+		it("should return all heroes", async () => {
+			const heroes = await firstValueFrom(service.getAll());
 
-  describe('create', () => {
-    it('should create a new hero', async () => {
-      const newHero: Omit<SuperHero, 'id'> = {
-        name: 'Batman',
-        description: 'Dark knight',
-        powers: ['intelligence', 'martial arts']
-      };
+			expect(heroes.length).toBeGreaterThan(0);
+			expect("id" in heroes[0]).toBe(true);
+			expect("name" in heroes[0]).toBe(true);
+			expect("description" in heroes[0]).toBe(true);
+			expect("powers" in heroes[0]).toBe(true);
+		});
+	});
 
-      const createdHero = await firstValueFrom(service.create(newHero));
+	describe("create", () => {
+		it("should create a new hero", async () => {
+			const newHero: Omit<SuperHero, "id"> = {
+				name: "Batman",
+				description: "Dark knight",
+				powers: ["intelligence", "martial arts"],
+			};
 
-      expect(createdHero.name).toBe('Batman');
-      expect(createdHero.description).toBe('Dark knight');
-      expect(createdHero.powers).toEqual(['intelligence', 'martial arts']);
-      expect(createdHero.id).toBeDefined();
-    });
-  });
+			const createdHero = await firstValueFrom(service.create(newHero));
 
-  describe('getById', () => {
-    it('should return hero by id', async () => {
-      const heroes = await firstValueFrom(service.getAll());
-      const firstHero = heroes[0];
-      const foundHero = await firstValueFrom(service.getById(firstHero.id));
+			expect(createdHero.name).toBe("Batman");
+			expect(createdHero.description).toBe("Dark knight");
+			expect(createdHero.powers).toEqual(["intelligence", "martial arts"]);
+			expect(createdHero.id).toBeDefined();
+		});
+	});
 
-      expect(foundHero).toEqual(firstHero);
-    });
+	describe("getById", () => {
+		it("should return hero by id", async () => {
+			const heroes = await firstValueFrom(service.getAll());
+			const firstHero = heroes[0];
+			const foundHero = await firstValueFrom(service.getById(firstHero.id));
 
-    it('should return undefined for non-existent id', async () => {
-      const result = await firstValueFrom(service.getById('non-existent-id'));
+			expect(foundHero).toEqual(firstHero);
+		});
 
-      expect(result).toBeUndefined();
-    });
-  });
+		it("should return undefined for non-existent id", async () => {
+			const result = await firstValueFrom(service.getById("non-existent-id"));
 
-  describe('searchByName', () => {
-    it('should return heroes matching name', async () => {
-      const result = await firstValueFrom(service.searchByName('man'));
+			expect(result).toBeUndefined();
+		});
+	});
 
-      expect(result.length).toBeGreaterThan(0);
-      result.forEach(hero => {
-        expect(hero.name.toLowerCase()).toContain('man');
-      });
-    });
+	describe("searchByName", () => {
+		it("should return heroes matching name", async () => {
+			const result = await firstValueFrom(service.searchByName("man"));
 
-    it('should return empty array for no matches', async () => {
-      const result = await firstValueFrom(service.searchByName('xyz123'));
+			expect(result.length).toBeGreaterThan(0);
+			result.forEach((hero) => {
+				expect(hero.name.toLowerCase()).toContain("man");
+			});
+		});
 
-      expect(result).toEqual([]);
-    });
-  });
+		it("should return empty array for no matches", async () => {
+			const result = await firstValueFrom(service.searchByName("xyz123"));
 
-  describe('update', () => {
-    it('should update existing hero', async () => {
-      const heroes = await firstValueFrom(service.getAll());
-      const heroToUpdate = { ...heroes[0], name: 'Updated Name' };
-      
-      const updatedHero = await firstValueFrom(service.update(heroToUpdate));
+			expect(result).toEqual([]);
+		});
+	});
 
-      expect(updatedHero.name).toBe('Updated Name');
-      expect(updatedHero.id).toBe(heroToUpdate.id);
-    });
-  });
+	describe("update", () => {
+		it("should update existing hero", async () => {
+			const heroes = await firstValueFrom(service.getAll());
+			const heroToUpdate = { ...heroes[0], name: "Updated Name" };
 
-  describe('delete', () => {
-    it('should delete hero by id', async () => {
-      const heroes = await firstValueFrom(service.getAll());
-      const heroToDelete = heroes[0];
-      const initialCount = heroes.length;
-      
-      await firstValueFrom(service.delete(heroToDelete.id));
-      const remainingHeroes = await firstValueFrom(service.getAll());
+			const updatedHero = await firstValueFrom(service.update(heroToUpdate));
 
-      expect(remainingHeroes.length).toBe(initialCount - 1);
-      expect(remainingHeroes.find(h => h.id === heroToDelete.id)).toBeUndefined();
-    });
-  });
-}); 
+			expect(updatedHero.name).toBe("Updated Name");
+			expect(updatedHero.id).toBe(heroToUpdate.id);
+		});
+	});
+
+	describe("delete", () => {
+		it("should delete hero by id", async () => {
+			const heroes = await firstValueFrom(service.getAll());
+			const heroToDelete = heroes[0];
+			const initialCount = heroes.length;
+
+			await firstValueFrom(service.delete(heroToDelete.id));
+			const remainingHeroes = await firstValueFrom(service.getAll());
+
+			expect(remainingHeroes.length).toBe(initialCount - 1);
+			expect(
+				remainingHeroes.find((h) => h.id === heroToDelete.id),
+			).toBeUndefined();
+		});
+	});
+});
