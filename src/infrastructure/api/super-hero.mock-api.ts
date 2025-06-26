@@ -2,8 +2,8 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject, type Observable, of } from "rxjs";
 import { delay, map } from "rxjs/operators";
 import { v4 as uuidv4 } from "uuid";
-import type { SuperHero } from "../../domain/models/super-hero.model";
-import { SuperHeroService } from "../../domain/services/super-hero.service";
+import type { SuperHero } from "@/domain/models/super-hero.model";
+import { SuperHeroService } from "@/domain/services/super-hero.service";
 
 @Injectable({ providedIn: "root" })
 export class SuperHeroMockApiService extends SuperHeroService {

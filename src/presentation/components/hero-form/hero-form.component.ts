@@ -12,7 +12,7 @@ import {
 	ReactiveFormsModule,
 	Validators,
 } from "@angular/forms";
-import type { SuperHero } from "../../../domain/models/super-hero.model";
+import type { SuperHero } from "@/domain/models/super-hero.model";
 
 @Component({
 	selector: "app-hero-form",

@@ -1,5 +1,5 @@
 import type { Observable } from "rxjs";
-import type { SuperHero } from "../models/super-hero.model";
+import type { SuperHero } from "@/domain/models/super-hero.model";
 
 export abstract class SuperHeroService {
 	abstract create(hero: Omit<SuperHero, "id">): Observable<SuperHero>;

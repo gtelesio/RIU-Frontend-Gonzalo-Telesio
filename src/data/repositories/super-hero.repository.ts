@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { SuperHeroService } from "../../domain/services/super-hero.service";
-import { SuperHeroMockApiService } from "../../infrastructure/api/super-hero.mock-api";
+import { SuperHeroService } from "@/domain/services/super-hero.service";
+import { SuperHeroMockApiService } from "@/infrastructure/api/super-hero.mock-api";
 
 @Injectable({ providedIn: "root" })
 export class SuperHeroRepository extends SuperHeroService {

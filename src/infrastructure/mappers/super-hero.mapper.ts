@@ -1,4 +1,4 @@
-import type { SuperHero } from "../../domain/models/super-hero.model";
+import type { SuperHero } from "@/domain/models/super-hero.model";
 
 export interface SuperHeroDTO {
 	id: string;

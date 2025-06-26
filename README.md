@@ -45,12 +45,12 @@ El proyecto está preparado para integrarse en pipelines de CI/CD, ejecutando te
 
 Para dudas o mejoras, ¡abre un issue o PR!
 
-## Development server
+## Servidor de desarrollo
 
-To start a local development server, run:
+Para iniciar el servidor de desarrollo local, ejecuta:
 
 ```bash
 yarn start
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Una vez iniciado, abre tu navegador y accede a `http://localhost:4200/`. La aplicación se recargará automáticamente cada vez que modifiques los archivos fuente.

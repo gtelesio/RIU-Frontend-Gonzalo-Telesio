@@ -1,7 +1,7 @@
 import { type ComponentFixture, TestBed } from "@angular/core/testing";
 import { ReactiveFormsModule } from "@angular/forms";
-import type { SuperHero } from "../../../domain/models/super-hero.model";
-import { HeroFormComponent } from "../../../presentation/components/hero-form/hero-form.component";
+import type { SuperHero } from "@/domain/models/super-hero.model";
+import { HeroFormComponent } from "@/presentation/components/hero-form/hero-form.component";
 
 describe("HeroFormComponent", () => {
 	let component: HeroFormComponent;

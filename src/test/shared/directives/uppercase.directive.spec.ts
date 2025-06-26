@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { type ComponentFixture, TestBed } from "@angular/core/testing";
 import { FormsModule } from "@angular/forms";
-import { UppercaseDirective } from "../../../shared/directives/uppercase.directive";
+import { UppercaseDirective } from "@/shared/directives/uppercase.directive";
 
 @Component({
 	template: '<input appUppercase [(ngModel)]="text" />',

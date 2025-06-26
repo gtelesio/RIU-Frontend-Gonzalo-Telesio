@@ -9,7 +9,16 @@
       "node"
     ],
     "useDefineForClassFields": false,
-    "module": "commonjs"
+    "module": "commonjs",
+    "baseUrl": "./src",
+    "paths": {
+      "@/domain/*": ["domain/*"],
+      "@/data/*": ["data/*"],
+      "@/infrastructure/*": ["infrastructure/*"],
+      "@/presentation/*": ["presentation/*"],
+      "@/shared/*": ["shared/*"],
+      "@/app/*": ["app/*"]
+    }
   },
   "files": [
     "src/test-setup.ts"

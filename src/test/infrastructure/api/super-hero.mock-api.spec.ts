@@ -1,7 +1,7 @@
 import { TestBed } from "@angular/core/testing";
 import { firstValueFrom } from "rxjs";
-import type { SuperHero } from "../../../domain/models/super-hero.model";
-import { SuperHeroMockApiService } from "../../../infrastructure/api/super-hero.mock-api";
+import type { SuperHero } from "@/domain/models/super-hero.model";
+import { SuperHeroMockApiService } from "@/infrastructure/api/super-hero.mock-api";
 
 describe("SuperHeroMockApiService", () => {
 	let service: SuperHeroMockApiService;

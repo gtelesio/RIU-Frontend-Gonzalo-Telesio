@@ -1,7 +1,7 @@
 import {
 	type SuperHero,
 	SuperHeroEntity,
-} from "../../../domain/models/super-hero.model";
+} from "@/domain/models/super-hero.model";
 
 describe("SuperHero Model", () => {
 	describe("SuperHero Interface", () => {

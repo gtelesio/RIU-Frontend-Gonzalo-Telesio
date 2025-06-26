@@ -3,9 +3,9 @@ import { Component, type OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { BehaviorSubject, type Observable } from "rxjs";
 import { switchMap, tap } from "rxjs/operators";
-import { SuperHeroRepository } from "../../../data/repositories/super-hero.repository";
-import type { SuperHero } from "../../../domain/models/super-hero.model";
-import { HeroListComponent } from "../../components/hero-list/hero-list.component";
+import { SuperHeroRepository } from "@/data/repositories/super-hero.repository";
+import type { SuperHero } from "@/domain/models/super-hero.model";
+import { HeroListComponent } from "@/presentation/components/hero-list/hero-list.component";
 
 @Component({
 	selector: "app-hero-list-page",

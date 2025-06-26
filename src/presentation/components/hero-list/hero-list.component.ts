@@ -7,8 +7,8 @@ import {
 	Output,
 } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import type { SuperHero } from "../../../domain/models/super-hero.model";
-import { LoadingSkeletonComponent } from "../../../shared/components/loading-skeleton/loading-skeleton.component";
+import type { SuperHero } from "@/domain/models/super-hero.model";
+import { LoadingSkeletonComponent } from "@/shared/components/loading-skeleton/loading-skeleton.component";
 
 @Component({
 	selector: "app-hero-list",

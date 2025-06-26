@@ -1,9 +1,9 @@
 import { CommonModule } from "@angular/common";
 import { Component, type OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { SuperHeroRepository } from "../../../data/repositories/super-hero.repository";
-import type { SuperHero } from "../../../domain/models/super-hero.model";
-import { HeroFormComponent } from "../../components/hero-form/hero-form.component";
+import { SuperHeroRepository } from "@/data/repositories/super-hero.repository";
+import type { SuperHero } from "@/domain/models/super-hero.model";
+import { HeroFormComponent } from "@/presentation/components/hero-form/hero-form.component";
 
 @Component({
 	selector: "app-hero-form-page",

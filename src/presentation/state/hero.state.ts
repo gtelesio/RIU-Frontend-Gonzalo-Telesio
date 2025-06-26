@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
-import type { SuperHero } from "../../domain/models/super-hero.model";
+import type { SuperHero } from "@/domain/models/super-hero.model";
 
 export interface HeroState {
 	heroes: SuperHero[];

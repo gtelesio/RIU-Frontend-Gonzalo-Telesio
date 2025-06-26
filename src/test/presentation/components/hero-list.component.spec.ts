@@ -1,8 +1,8 @@
 import { CommonModule } from "@angular/common";
 import { type ComponentFixture, TestBed } from "@angular/core/testing";
 import { FormsModule } from "@angular/forms";
-import type { SuperHero } from "../../../domain/models/super-hero.model";
-import { HeroListComponent } from "../../../presentation/components/hero-list/hero-list.component";
+import type { SuperHero } from "@/domain/models/super-hero.model";
+import { HeroListComponent } from "@/presentation/components/hero-list/hero-list.component";
 
 describe("HeroListComponent", () => {
 	let component: HeroListComponent;
