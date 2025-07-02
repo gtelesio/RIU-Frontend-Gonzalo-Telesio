@@ -43,6 +43,10 @@ describe("HeroListComponent", () => {
 
 			const rows = fixture.nativeElement.querySelectorAll("tbody tr");
 			expect(rows.length).toBe(2);
+			const firstRowCells = rows[0].querySelectorAll("td");
+			const secondRowCells = rows[1].querySelectorAll("td");
+			expect(firstRowCells[0].textContent).toContain("SPIDERMAN");
+			expect(secondRowCells[0].textContent).toContain("BATMAN");
 		});
 
 		it("should show loading when loading input is true", () => {
@@ -82,7 +86,7 @@ describe("HeroListComponent", () => {
 			fixture.detectChanges();
 
 			const buttons = fixture.nativeElement.querySelectorAll("button");
-			const editButton = buttons[1] as HTMLButtonElement; // Second button should be edit
+			const editButton = buttons[1] as HTMLButtonElement;
 			editButton.click();
 
 			expect(component.edit.emit).toHaveBeenCalledWith(mockHeroes[0]);
@@ -94,7 +98,7 @@ describe("HeroListComponent", () => {
 			fixture.detectChanges();
 
 			const buttons = fixture.nativeElement.querySelectorAll("button");
-			const deleteButton = buttons[2] as HTMLButtonElement; // Third button should be delete
+			const deleteButton = buttons[2] as HTMLButtonElement;
 			deleteButton.click();
 
 			expect(component.remove.emit).toHaveBeenCalledWith(mockHeroes[0]);
@@ -120,7 +124,7 @@ describe("HeroListComponent", () => {
 			const firstRow = fixture.nativeElement.querySelector("tbody tr");
 			const cells = firstRow.querySelectorAll("td");
 
-			expect(cells[0].textContent).toContain("Spiderman");
+			expect(cells[0].textContent).toContain("SPIDERMAN");
 			expect(cells[1].textContent).toContain("Spider man");
 			expect(cells[2].textContent).toContain("wall crawling");
 			expect(cells[2].textContent).toContain("spider sense");

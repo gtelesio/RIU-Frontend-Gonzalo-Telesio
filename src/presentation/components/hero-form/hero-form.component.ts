@@ -5,6 +5,8 @@ import {
 	Input,
 	type OnInit,
 	Output,
+	OnChanges,
+	SimpleChanges
 } from "@angular/core";
 import {
 	FormBuilder,
@@ -13,15 +15,16 @@ import {
 	Validators,
 } from "@angular/forms";
 import type { SuperHero } from "@/domain/models/super-hero.model";
+import { UppercaseDirective } from "@/shared/directives/uppercase.directive";
 
 @Component({
 	selector: "app-hero-form",
 	standalone: true,
-	imports: [CommonModule, ReactiveFormsModule],
+	imports: [CommonModule, ReactiveFormsModule, UppercaseDirective],
 	templateUrl: "./hero-form.component.html",
 	styleUrls: ["./hero-form.component.scss"],
 })
-export class HeroFormComponent implements OnInit {
+export class HeroFormComponent implements OnInit, OnChanges {
 	@Input() hero: SuperHero | null = null;
 	@Output() save = new EventEmitter<Omit<SuperHero, "id">>();
 	@Output() cancel = new EventEmitter<void>();
@@ -31,6 +34,20 @@ export class HeroFormComponent implements OnInit {
 	constructor(private fb: FormBuilder) {}
 
 	ngOnInit(): void {
+		this.initForm();
+	}
+
+	ngOnChanges(changes: SimpleChanges): void {
+		if (changes['hero'] && this.form) {
+			this.form.patchValue({
+				name: this.hero?.name || "",
+				description: this.hero?.description || "",
+				powers: this.hero?.powers?.join(", ") || "",
+			});
+		}
+	}
+
+	private initForm() {
 		this.form = this.fb.group({
 			name: [
 				this.hero?.name || "",

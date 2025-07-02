@@ -18,9 +18,16 @@ describe("HeroFormComponent", () => {
 		await TestBed.configureTestingModule({
 			imports: [HeroFormComponent, ReactiveFormsModule],
 		}).compileComponents();
+	});
 
+	beforeEach(() => {
 		fixture = TestBed.createComponent(HeroFormComponent);
 		component = fixture.componentInstance;
+		fixture.detectChanges();
+	});
+
+	afterEach(() => {
+		fixture.destroy();
 	});
 
 	it("should create", () => {
@@ -29,8 +36,6 @@ describe("HeroFormComponent", () => {
 
 	describe("Form Initialization", () => {
 		it("should initialize form with empty values when no hero input", () => {
-			fixture.detectChanges();
-
 			expect(component.form.get("name")?.value).toBe("");
 			expect(component.form.get("description")?.value).toBe("");
 			expect(component.form.get("powers")?.value).toBe("");
@@ -38,7 +43,14 @@ describe("HeroFormComponent", () => {
 
 		it("should initialize form with hero values when hero input is provided", () => {
 			component.hero = mockHero;
-			fixture.detectChanges();
+			component.ngOnChanges({
+				hero: {
+					currentValue: mockHero,
+					previousValue: null,
+					firstChange: true,
+					isFirstChange: () => true
+				}
+			});
 
 			expect(component.form.get("name")?.value).toBe("Spiderman");
 			expect(component.form.get("description")?.value).toBe("Spider man");
@@ -49,10 +61,6 @@ describe("HeroFormComponent", () => {
 	});
 
 	describe("Form Validation", () => {
-		beforeEach(() => {
-			fixture.detectChanges();
-		});
-
 		it("should be invalid when form is empty", () => {
 			expect(component.form.valid).toBeFalsy();
 		});
@@ -90,10 +98,6 @@ describe("HeroFormComponent", () => {
 	});
 
 	describe("Form Submission", () => {
-		beforeEach(() => {
-			fixture.detectChanges();
-		});
-
 		it("should emit save event with correct data when form is valid", () => {
 			spyOn(component.save, "emit");
 
@@ -116,7 +120,7 @@ describe("HeroFormComponent", () => {
 			spyOn(component.save, "emit");
 
 			component.form.patchValue({
-				name: "ab", // Invalid - too short
+				name: "ab",
 				description: "Test description",
 				powers: "test power",
 			});
@@ -128,7 +132,6 @@ describe("HeroFormComponent", () => {
 
 		it("should emit cancel event when cancel button is clicked", () => {
 			spyOn(component.cancel, "emit");
-			fixture.detectChanges();
 
 			const cancelButton = fixture.nativeElement.querySelector(
 				'button[type="button"]',
@@ -141,7 +144,6 @@ describe("HeroFormComponent", () => {
 
 	describe("Powers Processing", () => {
 		it("should split powers string into array", () => {
-			fixture.detectChanges();
 			component.form.patchValue({
 				name: "Test Hero",
 				description: "Test description",
@@ -157,7 +159,6 @@ describe("HeroFormComponent", () => {
 		});
 
 		it("should trim whitespace from powers", () => {
-			fixture.detectChanges();
 			component.form.patchValue({
 				name: "Test Hero",
 				description: "Test description",

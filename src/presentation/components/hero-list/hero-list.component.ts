@@ -1,4 +1,4 @@
-import { CommonModule } from "@angular/common";
+import { NgFor, NgIf } from "@angular/common";
 import {
 	Component,
 	EventEmitter,
@@ -9,11 +9,12 @@ import {
 import { FormsModule } from "@angular/forms";
 import type { SuperHero } from "@/domain/models/super-hero.model";
 import { LoadingSkeletonComponent } from "@/shared/components/loading-skeleton/loading-skeleton.component";
+import { UppercasePipe } from "@/shared/pipes/uppercase.pipe";
 
 @Component({
 	selector: "app-hero-list",
 	standalone: true,
-	imports: [CommonModule, FormsModule, LoadingSkeletonComponent],
+	imports: [NgIf, NgFor, FormsModule, LoadingSkeletonComponent, UppercasePipe],
 	templateUrl: "./hero-list.component.html",
 	styleUrls: ["./hero-list.component.scss"],
 })

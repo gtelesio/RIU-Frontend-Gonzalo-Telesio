@@ -1,11 +1,11 @@
 import { CommonModule } from "@angular/common";
-import { Component, type OnInit } from "@angular/core";
+import { Component, OnInit, signal } from "@angular/core";
 import { Router } from "@angular/router";
-import { BehaviorSubject, type Observable } from "rxjs";
-import { switchMap, tap } from "rxjs/operators";
 import { SuperHeroRepository } from "@/data/repositories/super-hero.repository";
 import type { SuperHero } from "@/domain/models/super-hero.model";
 import { HeroListComponent } from "@/presentation/components/hero-list/hero-list.component";
+import { HeroStateService } from "@/presentation/state/hero.state";
+import Swal from 'sweetalert2';
 
 @Component({
 	selector: "app-hero-list-page",
@@ -15,24 +15,30 @@ import { HeroListComponent } from "@/presentation/components/hero-list/hero-list
 	styleUrls: ["./hero-list-page.component.scss"],
 })
 export class HeroListPageComponent implements OnInit {
-	heroes$: Observable<SuperHero[]>;
-	loading$ = new BehaviorSubject<boolean>(false);
-	filter$ = new BehaviorSubject<string>("");
+	filter = signal("");
+	loading = signal(false);
 
 	constructor(
 		private repo: SuperHeroRepository,
 		private router: Router,
-	) {
-		this.heroes$ = this.filter$.pipe(
-			tap(() => this.loading$.next(true)),
-			switchMap((filter) =>
-				filter ? this.repo.searchByName(filter) : this.repo.getAll(),
-			),
-			tap(() => this.loading$.next(false)),
-		);
+		public heroState: HeroStateService,
+	) {}
+
+	ngOnInit(): void {
+		this.loadHeroes();
 	}
 
-	ngOnInit(): void {}
+	loadHeroes() {
+		this.loading.set(true);
+		const filterValue = this.filter();
+		const obs = filterValue
+			? this.repo.searchByName(filterValue)
+			: this.repo.getAll();
+		obs.subscribe((heroes) => {
+			this.heroState.setHeroes(heroes ?? []);
+			this.loading.set(false);
+		});
+	}
 
 	onAdd() {
 		this.router.navigate(["/superheroes/new"]);
@@ -42,17 +48,28 @@ export class HeroListPageComponent implements OnInit {
 		this.router.navigate(["/superheroes", hero.id, "edit"]);
 	}
 
-	onDelete(hero: SuperHero) {
-		if (confirm(`Are you sure you want to delete ${hero.name}?`)) {
-			this.loading$.next(true);
+	async onDelete(hero: SuperHero) {
+		const result = await Swal.fire({
+			title: `Are you sure you want to delete ${hero.name}?`,
+			text: "This action cannot be undone!",
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#d33",
+			cancelButtonColor: "#3085d6",
+			confirmButtonText: "Yes, delete it!",
+		});
+		if (result.isConfirmed) {
+			this.loading.set(true);
 			this.repo.delete(hero.id).subscribe(() => {
-				this.filter$.next(this.filter$.value); // refresh list
-				this.loading$.next(false);
+				this.loadHeroes();
+				this.loading.set(false);
+				Swal.fire("Deleted!", `${hero.name} has been deleted.`, "success");
 			});
 		}
 	}
 
 	onFilter(filter: string) {
-		this.filter$.next(filter);
+		this.filter.set(filter);
+		this.loadHeroes();
 	}
 }

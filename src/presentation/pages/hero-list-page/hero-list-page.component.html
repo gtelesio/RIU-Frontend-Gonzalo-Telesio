@@ -1,9 +1,9 @@
+<h1>Superhero Management System</h1>
 <app-hero-list
-  [heroes]="(heroes$ | async) ?? []"
-  [loading]="(loading$ | async) ?? false"
+  [heroes]="heroState.heroes()"
+  [loading]="loading()"
   (add)="onAdd()"
   (edit)="onEdit($event)"
   (remove)="onDelete($event)"
   (filter)="onFilter($event)">
-</app-hero-list>
-<!-- TODO: Add modal or section for hero form --> 
+</app-hero-list> 
