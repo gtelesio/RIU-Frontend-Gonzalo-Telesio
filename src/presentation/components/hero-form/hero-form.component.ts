@@ -39,7 +39,7 @@ export class HeroFormComponent implements OnInit, OnChanges {
 
 	ngOnChanges(changes: SimpleChanges): void {
 		// biome-ignore lint/complexity/useLiteralKeys: Necesario para TypeScript
-		if (changes['hero'] && this.form) {
+		if (changes["hero"] && this.form) {
 			this.form.patchValue({
 				name: this.hero?.name || "",
 				description: this.hero?.description || "",
