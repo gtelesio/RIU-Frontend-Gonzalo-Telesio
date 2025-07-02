@@ -3,14 +3,14 @@ import {
 	Component,
 	EventEmitter,
 	Input,
+	OnChanges,
 	type OnInit,
 	Output,
-	OnChanges,
-	SimpleChanges
+	SimpleChanges,
 } from "@angular/core";
 import {
 	FormBuilder,
-	type FormGroup,
+	FormGroup,
 	ReactiveFormsModule,
 	Validators,
 } from "@angular/forms";

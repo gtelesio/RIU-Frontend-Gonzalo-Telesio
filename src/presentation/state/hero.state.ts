@@ -1,4 +1,4 @@
-import { Injectable, signal, computed } from "@angular/core";
+import { computed, Injectable, signal } from "@angular/core";
 import type { SuperHero } from "@/domain/models/super-hero.model";
 
 export interface HeroState {

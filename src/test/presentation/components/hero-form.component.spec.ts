@@ -48,8 +48,8 @@ describe("HeroFormComponent", () => {
 					currentValue: mockHero,
 					previousValue: null,
 					firstChange: true,
-					isFirstChange: () => true
-				}
+					isFirstChange: () => true,
+				},
 			});
 
 			expect(component.form.get("name")?.value).toBe("Spiderman");

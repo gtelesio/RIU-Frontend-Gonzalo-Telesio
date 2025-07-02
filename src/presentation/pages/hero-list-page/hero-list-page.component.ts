@@ -1,11 +1,11 @@
 import { CommonModule } from "@angular/common";
 import { Component, OnInit, signal } from "@angular/core";
 import { Router } from "@angular/router";
+import Swal from "sweetalert2";
 import { SuperHeroRepository } from "@/data/repositories/super-hero.repository";
 import type { SuperHero } from "@/domain/models/super-hero.model";
 import { HeroListComponent } from "@/presentation/components/hero-list/hero-list.component";
 import { HeroStateService } from "@/presentation/state/hero.state";
-import Swal from 'sweetalert2';
 
 @Component({
 	selector: "app-hero-list-page",
